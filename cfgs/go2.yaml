@@ -40,7 +40,7 @@ learning:
   record_interval: 50
   save_interval: 100
   seed: 1
-  wandb_entity: ziyanx02
+  wandb_entity: elijahgalahad
   wandb_project: Gait
 environment:
   PPO: false

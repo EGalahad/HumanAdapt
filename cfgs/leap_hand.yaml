@@ -3,7 +3,7 @@ learning:
     class_name: TDO
     clip_param: 0.2
     desired_kl: 0.01
-    entropy_coef: 0.01
+    entropy_coef: 0.001
     gamma: 0.99
     lam: 0.95
     learning_rate: 0.001
@@ -40,7 +40,7 @@ learning:
   record_interval: 50
   save_interval: 100
   seed: 1
-  wandb_entity: ziyanx02
+  wandb_entity: elijahgalahad
   wandb_project: Gait
 environment:
   PPO: false
@@ -69,6 +69,11 @@ environment:
   - dip_2
   - dip_3
   - thumb_dip
+  feet_link_names:
+  - fingertip
+  - fingertip_2
+  - fingertip_3
+  - thumb_fingertip
   body_link_name:
   - base
   PD_stiffness:
@@ -108,32 +113,34 @@ environment:
   termination_if_height_lower_than: 0.0
   termination_if_pitch_greater_than: 0.4
   termination_if_roll_greater_than: 0.4
+
   base_init_pos:
   - 0.0
   - 0.0
-  - 0.24119752645492554
+  - 0.3
+
   base_init_quat:
-  - 0.7071067690849304
+  - 0.70711
   - 0.0
-  - 0.7071068286895752
-  - 3.615632238052058e-09
+  - 0.70711
+  - 0.0
   default_joint_angles:
-    '0': 0.
-    '1': 0.
-    '10': 0.
-    '11': 0.
-    '12': 0.
-    '13': 0.
-    '14': 0.
-    '15': 0.
-    '2': 0.
-    '3': 0.
-    '4': 0.
-    '5': 0.
-    '6': 0.
-    '7': 0.
-    '8': 0.
-    '9': 0.
+    '1': 0.322
+    '5': 0.30301
+    '9': 0.30301
+    '12': 0.41672
+    '0': 0.14064
+    '4': -0.02344
+    '8': 0.10939
+    '13': 1.13867
+    '2': 0.2791
+    '6': 0.20773
+    '10': 0.52891
+    '14': 0.16493
+    '3': 0.11919
+    '7': 0.0
+    '11': 0.00239
+    '15': -0.15052
   resampling_time_s: 4.0
   randomize_base_mass: false
   added_mass_range:
@@ -169,7 +176,7 @@ environment:
   max_push_vel_xy: 1.0
   push_interval_s: -1
   observation:
-    num_obs: 51
+    num_obs: 54
     num_priv_obs: 70
     obs_noise:
       ang_vel: 0.0
@@ -184,4 +191,22 @@ environment:
   reward:
     reward_scales:
       alive: 1.0
-      # reward scales here
+      lin_vel: 1.0
+      ang_vel: 0.5
+      alive: 3.0
+      ang_vel_xy: -0.0001
+      base_height: -0.02
+      dof_acc: -0.01
+      dof_vel: -0.0
+      dof_pos_diff: -0.01
+      lin_vel_z: -0.002
+      orientation: -0.1
+      # contact_force: -1.0
+      # contact_vel: -1.0
+      # feet_height: -10.0
+      # feet_pos: -10.0
+      action_smoothness_1: -0.01
+      action_smoothness_2: -0.01
+      torques: -0.00002
+    soft_dof_pos_limit: 0.9
+    tracking_sigma: 0.25

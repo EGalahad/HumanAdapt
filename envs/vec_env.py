@@ -684,6 +684,7 @@ class VecEnv:
     def compute_observation(self):
         obs_buf = torch.cat(
             [
+                self.body_lin_vel * self.obs_scales['lin_vel'],                     # 3
                 self.body_ang_vel_local * self.obs_scales['ang_vel'],               # 3
                 (self.dof_pos - self.default_dof_pos) * self.obs_scales['dof_pos'],
                 self.dof_vel * self.obs_scales['dof_vel'],                         
